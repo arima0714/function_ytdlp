@@ -8,7 +8,6 @@ import (
 	"context"
 	"io"
 	"log"
-	"os"
 
 	"github.com/wader/goutubedl"
 )
@@ -26,13 +25,13 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	downloadResult, err += result.Download(context.Background(), "best")
+	downloadResult, err := result.Download(context.Background(), "best")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer downloadResult.Close()
 	f, err := os.Create("output")
-	if err != nil{
+	if err != nil {
 		log.Fatal(err)
 	}
 	defer f.Close()
