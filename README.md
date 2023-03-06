@@ -15,9 +15,17 @@ brew install iron-functions
 
 # ビルド
 
+初回
 ```
 fn init testapp/function_ytdlp
 fn build
 fn apps create function_ytdlp
 fn routes create function_ytdlp /function_ytdlp
+```
+
+2回目以降
+```
+fn bump
+fn build
+fn routes update function_ytdlp /function_ytdlp
 ```
