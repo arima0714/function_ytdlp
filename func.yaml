@@ -1,6 +1,0 @@
-name: testapp/function_ytdlp
-version: 0.0.11
-runtime: go
-entrypoint: ./func
-path: /function_ytdlp
-max_concurrency: 1
