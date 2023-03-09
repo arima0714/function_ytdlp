@@ -7,6 +7,7 @@ init:
 
 .PHONY: build
 build:
+	poetry export -f requirements.txt -o requirements.txt
 	fn bump
 	fn build
 	fn routes update function_ytdlp /function_ytdlp

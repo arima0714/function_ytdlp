@@ -1,6 +1,6 @@
 name: testapp/function_ytdlp
-version: 0.0.5
+version: 0.0.9
 build:
-- docker run --rm -v "$PWD":/worker -w /worker iron/python:3-dev pip install -t packages
+- docker run --rm -v "$PWD":/worker -w /worker iron/python pip install -t packages
   -r requirements.txt
 path: /function_ytdlp
