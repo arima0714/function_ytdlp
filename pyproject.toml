@@ -9,6 +9,7 @@ packages = [{include = "function_ytdlp"}]
 [tool.poetry.dependencies]
 python = "^3.11"
 yt-dlp = "^2023.3.4"
+boto3 = "^1.26.88"
 
 [build-system]
 requires = ["poetry-core"]
