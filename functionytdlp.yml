@@ -1,0 +1,10 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://192.168.50.123:31112
+functions:
+  functionytdlp:
+    lang: python3
+    handler: ./functionytdlp
+    image: functionytdlp:latest
+
