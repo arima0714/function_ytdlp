@@ -4,4 +4,6 @@ def handle(req):
         req (str): request body
     """
 
+    print(f"hello")
+
     return req
