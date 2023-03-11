@@ -7,4 +7,6 @@ functions:
     lang: python3
     handler: ./functionytdlp
     image: 192.168.50.123:32000/functionytdlp:latest
-
+    environment:
+      username: <minio-username>
+      password: <minio-password>
