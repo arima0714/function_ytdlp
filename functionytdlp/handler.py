@@ -1,6 +1,7 @@
 from yt_dlp import YoutubeDL
 import boto3
 import os
+import json
 
 def handle(req):
     """handle a request to the function
@@ -19,8 +20,11 @@ def handle(req):
     for bucket in s3.buckets.all():
         print(bucket.name)
 
-    URLS = ["https://www.youtube.com/watch?v=BaW_jenozKc"]
-    return req
+    URL = "https://www.youtube.com/watch?v=BaW_jenozKc"
+    URLS = [URL]
     with YoutubeDL() as ydl:
+        info = ydl.extract_info(URL, download=False)
+        print(json.loads(json.dumps(ydl.sanitize_info(info)))["title"])
         ydl.download(URLS)
 
+    return req
