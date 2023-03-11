@@ -1,6 +1,6 @@
 .PHONY: all
 all:
-	faas-cli up -f functionytdlp.yml --no-cache
+	faas-cli up -f functionytdlp.yml --no-cache --env write_debug=true
 
 .PHONY: build
 build:
