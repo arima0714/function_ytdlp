@@ -10,6 +10,10 @@ def handle(req):
         req (str): request body
     """
 
+    req_dict = json.loads(req)
+    print(req_dict)
+    print(f"{type(req_dict)}")
+
     s3 = boto3.resource(
         's3',
         endpoint_url = "http://10.1.21.85:9000",
@@ -29,8 +33,7 @@ def handle(req):
         aws_secret_access_key = os.environ['password']
     )
 
-    URL = "https://www.youtube.com/watch?v=BaW_jenozKc"
-    URLS = [URL]
+    URLS = [req_dict["url"]]
     ydl_opts = {'outtmpl': './resolution'+'%(resolution)s'+'duration'+'%(duration)s'+'_.mp4'}
     with YoutubeDL(ydl_opts) as ydl:
         info = ydl.extract_info(URL, download=False)
