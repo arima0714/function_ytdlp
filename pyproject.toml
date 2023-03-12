@@ -10,6 +10,7 @@ packages = [{include = "function_ytdlp"}]
 python = "^3.11"
 yt-dlp = "^2023.3.4"
 boto3 = "^1.26.88"
+opencv-python = "^4.7.0.72"
 
 [build-system]
 requires = ["poetry-core"]
