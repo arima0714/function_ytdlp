@@ -1,27 +1,41 @@
-FROM ghcr.io/openfaas/classic-watchdog:0.2.1 as watchdog
+FROM ghcr.io/openfaas/of-watchdog:0.9.2 as watchdog
 
-FROM alpine:3.12
+FROM node:16-alpine as build
 
-RUN mkdir -p /home/app
+WORKDIR /root/
+
+ENV NPM_CONFIG_LOGLEVEL warn
+
+COPY package.json ./
+
+RUN npm i --production
+
+COPY src ./src
+COPY public ./public
+
+RUN NODE_ENV=production npm run build
+RUN find build/
+
+FROM alpine:3.14 AS runtime
+WORKDIR /home/app/
+RUN addgroup -S -g 1000 app && adduser -S -u 1000 -g app app
+
+COPY --from=build /root/build /home/app/public
+WORKDIR /home/app/public
 
 COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
-RUN chmod +x /usr/bin/fwatchdog
 
-# Add non root user
-RUN addgroup -S app && adduser app -S -G app
-RUN chown app /home/app
-
-WORKDIR /home/app
+RUN chown app:app -R /home/app && chmod 777 /tmp
 
 USER app
 
-# Populate example here - i.e. "cat", "sha512sum" or "node index.js"
-ENV fprocess="cat"
-# Set to true to see request in function logs
-ENV write_debug="false"
+ENV mode="static"
+ENV static_path="/home/app/public"
 
-EXPOSE 8080
+ENV exec_timeout="10s"
+ENV write_timeout="11s"
+ENV read_timeout="11s"
 
-HEALTHCHECK --interval=3s CMD [ -e /tmp/.lock ] || exit 1
+HEALTHCHECK --interval=5s CMD [ "-e /tmp/.lock" ] || exit 1
 
 CMD ["fwatchdog"]

@@ -4,7 +4,7 @@ provider:
   gateway: http://192.168.50.123:31112
 functions:
   portal:
-    lang: dockerfile
+    lang: node17-sfa
     handler: ./portal
     image: 192.168.50.123:32000/portal:latest
 
