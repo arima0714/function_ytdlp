@@ -4,3 +4,12 @@ template
 build
 .secrets
 *mp4
+### react ###
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
+
+node_modules
+bower_components
